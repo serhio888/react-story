@@ -1,17 +1,17 @@
 import React from 'react';
 
-const Bookmark = ({active,setActive}) => {
+const Bookmark = ({bookmarkActive,id,active}) => {
 
     if(active){
         return (
             <span className='bookmark'>
-                <i className="bi bi-bookmark-plus-fill" onClick={setActive}></i>
+                <i className="bi bi-bookmark-plus-fill" onClick={()=>bookmarkActive(id)}></i>
             </span>
         )
     } else {
           return (
             <span className='bookmark'>
-                <i className="bi bi-bookmark-dash" onClick={setActive}></i>
+                <i className="bi bi-bookmark-dash" onClick={()=>bookmarkActive(id)}></i>
             </span>
           )  
     }

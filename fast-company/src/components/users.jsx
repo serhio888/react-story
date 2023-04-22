@@ -1,7 +1,7 @@
 import React from "react";
 import User from "./user";
 
-const Users = ()=>{
+const Users = ({bookmarkActive,deleteUser,users})=>{
         return (
             
         <table className="table">
@@ -17,33 +17,18 @@ const Users = ()=>{
                 </tr>
             </thead>
             <tbody>
-                {/* {
+                {
                     users.map((user,index)=>{
-                        return (
-                            <tr key={user._id}>
-                                <th scope="row">{user.name}</th>
-                                <td>
-                                    {
-                                        user.qualities.map((qualitie)=><span key={qualitie._id} className={"badge text-bg-"+ qualitie.color}>{qualitie.name}</span>)
-                                    }
-                                </td>
-                                <td>{user.profession.name}</td>
-                                <td>{user.completedMeetings}</td>
-                                <td>{user.rate}/5</td>
-                                <td>
-                                    <button 
-                                        type="button"
-                                        className="btn btn-danger"
-                                        onClick={()=>handleDelete(index)}
-                                    >
-                                        delete
-                                    </button>
-                                </td>
-                            </tr>
-                        )
+                        return <User
+                                    key = {user._id}   
+                                    bookmarkActive={bookmarkActive}
+                                    deleteUser={deleteUser}
+                                    user={user}
+                                    id={index}
+                                 />
                     })
-                } */}
-                <User/>
+                }
+                
             </tbody>
         </table>
         )
