@@ -1,40 +1,23 @@
-import React,{useState} from "react";
-import api from '../api'
-import 'bootstrap/dist/css/bootstrap.css'
+import React from "react";
+import User from "./user";
 
 const Users = ()=>{
-    
-    const [users,setUsers] = useState(api.users.fetchAll())
-    const handleDelete = (userId)=>{
-         setUsers((pS)=>pS.filter((elem,index)=>index !== userId))
-    }
-    const renderPhrase = () => {
-            const l = users.length
-            if(l === 4 || l === 3 || l === 2 ){
-                return <span className="badge bg-primary">{users.length} человека тусонет с тобой сегодня</span>
-            }else {
-                return <span className="badge bg-primary">{users.length} человек тусонет с тобой сегодня</span>
-            }
-    }
-    if(users.length === 0){
-        return <span className="badge bg-warning text-dark">Никто не тусонет с тобой сегодня</span>
-    }else {
         return (
-            <>          
-            {renderPhrase()}
-            <table className="table">
+            
+        <table className="table">
             <thead>
                 <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Качества</th>
-                <th scope="col">Профессия</th>
-                <th scope="col">Встретился, раз</th>
-                <th scope="col">Оценка</th>
-                <th scope="col"></th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Качества</th>
+                    <th scope="col">Профессия</th>
+                    <th scope="col">Встретился, раз</th>
+                    <th scope="col">Оценка</th>
+                    <th scope="col">Избранное</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                {
+                {/* {
                     users.map((user,index)=>{
                         return (
                             <tr key={user._id}>
@@ -59,12 +42,12 @@ const Users = ()=>{
                             </tr>
                         )
                     })
-                }
+                } */}
+                <User/>
             </tbody>
         </table>
-            </>
         )
-    }
+    
     
 }
 
