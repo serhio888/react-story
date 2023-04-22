@@ -9,7 +9,7 @@ import { fetchAll } from './api/fake.api/user.api';
 const App = () =>{
 
     const [users,setUsers] = useState(fetchAll())
-    console.log(users)
+    
     const handleDelete = (userId)=> {
        setUsers(users.filter((user)=>user._id !== userId))
     }
@@ -23,7 +23,9 @@ const App = () =>{
                     bookmark:!user.bookmark
                 }
             }else {
-                return user
+                return {
+                    ...user
+                }
             }
         }))
     }
