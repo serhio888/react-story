@@ -9,15 +9,23 @@ import { fetchAll } from './api/fake.api/user.api';
 const App = () =>{
 
     const [users,setUsers] = useState(fetchAll())
-    
+    console.log(users)
     const handleDelete = (userId)=> {
        setUsers(users.filter((user)=>user._id !== userId))
     }
 
-    const handleToggleBookmark = (id)=>{
-        let newUsers = structuredClone(users)   //будем считать что у всех современные браузеры
-        newUsers[id].bookmark = !users[id].bookmark
-        setUsers(newUsers)
+    const handleToggleBookmark = (userId)=>{
+        setUsers(prevState => prevState.map(user=>{
+            if(user._id === userId) {
+                console.log(user)
+                return {
+                    ...user,
+                    bookmark:!user.bookmark
+                }
+            }else {
+                return user
+            }
+        }))
     }
 
     if(users.length === 0) return <SearchStatus length={users.length}/>

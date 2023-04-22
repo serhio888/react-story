@@ -18,13 +18,13 @@ const Users = ({bookmarkActive,deleteUser,users})=>{
             </thead>
             <tbody>
                 {
-                    users.map((user,index)=>{
+                    users.map((user)=>{
                         return <User
                                     key = {user._id}   
                                     bookmarkActive={bookmarkActive}
                                     deleteUser={deleteUser}
                                     user={user}
-                                    id={index}
+                                    id={user._id}
                                  />
                     })
                 }

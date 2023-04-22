@@ -1,8 +1,9 @@
 import React from 'react';
+import Quality from './quality';
 
 const Qualities = ({qualities}) =>{
     return (
-        qualities.map((qualitie)=><span key={qualitie._id} className={"badge p-1 m-1 text-bg-"+ qualitie.color}>{qualitie.name}</span>)
+        qualities.map(q=><Quality key={q._id} name={q.name} color={q.color}/>)
     )
 }
 
