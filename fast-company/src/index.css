@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.table {
+  text-align: center;
+}
+
+.bookmark {
+  font-size: 25px;
+}
