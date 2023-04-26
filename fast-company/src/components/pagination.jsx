@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Pagination = ({itemsCount,pageSize}) => {
+const Pagination = ({itemsCount,pageSize,onPageChange,active}) => {
 
     const pageCount = Math.ceil(itemsCount/pageSize)
     if(pageCount === 1) return null
@@ -13,7 +13,13 @@ const Pagination = ({itemsCount,pageSize}) => {
         <nav>
             <ul className="pagination">
                 {
-                    arr.map(page=><li key ={"page_" + page} className="page-item"><a className="page-link">{page}</a></li>)
+                    arr.map(page=>{
+                        return (
+                                <li key ={"page_" + page} className={"page-item"+(active===page?" active":"")}>
+                                    <a className="page-link" onClick={()=>onPageChange(page)}>{page}</a>
+                                </li>
+                        )
+                    })
                 }
             </ul>
         </nav>
