@@ -3,7 +3,6 @@ import Pagination from "./pagination";
 import User from "./user";
 
 const Users = ({bookmarkActive,deleteUser,users})=>{
-
         const count = users.length
         const pageSize = 4
         const handlePageChange = (number)=>{
