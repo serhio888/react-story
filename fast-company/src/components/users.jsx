@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Pagination from "./pagination";
 import User from "./user";
+import { paginate } from "../utils/paginate";
 
 const Users = ({bookmarkActive,deleteUser,users})=>{
 
@@ -11,6 +12,7 @@ const Users = ({bookmarkActive,deleteUser,users})=>{
         const handlePageChange = (page)=>{
             setCurrentPage(page)
         }
+        const userCrop = paginate(users,currentPage,pageSize)
         return (
         <>
           
@@ -28,7 +30,7 @@ const Users = ({bookmarkActive,deleteUser,users})=>{
             </thead>
             <tbody>
                 {
-                    users.map((user)=>{
+                    userCrop.map((user)=>{
                         return <User
                                     key = {user._id}   
                                     bookmarkActive={bookmarkActive}
