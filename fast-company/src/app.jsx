@@ -22,9 +22,7 @@ const App = () => {
                         bookmark: !user.bookmark
                     }
                 } else {
-                    return {
-                        ...user
-                    }
+                    return user
                 }
             })
         )
