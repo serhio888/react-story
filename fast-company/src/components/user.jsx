@@ -36,7 +36,18 @@ const User = ({ bookmarkActive, deleteUser, user, id }) => {
 User.propTypes = {
     bookmarkActive: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
-    user: PropTypes.object,
+    user: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        qualities: PropTypes.array.isRequired,
+        profession: PropTypes.shape({
+            _id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
+        }).isRequired,
+        completedMeetings: PropTypes.number.isRequired,
+        rate: PropTypes.number.isRequired,
+        bookmark: PropTypes.bool.isRequired,
+        _id: PropTypes.string.isRequired
+    }),
     id: PropTypes.string.isRequired
 }
 

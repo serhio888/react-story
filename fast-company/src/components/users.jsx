@@ -52,6 +52,6 @@ const Users = ({ bookmarkActive, deleteUser, users }) => {
 Users.propTypes = {
     bookmarkActive: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
-    users: PropTypes.array
+    users: PropTypes.array.isRequired
 }
 export default Users
