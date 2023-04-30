@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Pagination from "./pagination"
 import User from "./user"
 import { paginate } from "../utils/paginate"
@@ -12,6 +12,11 @@ const Users = ({ bookmarkActive, deleteUser, users }) => {
         setCurrentPage(page)
     }
     const userCrop = paginate(users, currentPage, pageSize)
+    useEffect(() => {
+        if (userCrop.length === 0 && currentPage !== 1) {
+            setCurrentPage(currentPage - 1)
+        }
+    }, [userCrop])
     return (
         <>
             <table className="table">
