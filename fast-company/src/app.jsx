@@ -12,6 +12,8 @@ const App = () => {
         setUsers(users.filter((user) => user._id !== userId))
     }
 
+    console.log(typeof users.length)
+
     const handleToggleBookmark = (userId) => {
         setUsers((prevState) =>
             prevState.map((user) => {

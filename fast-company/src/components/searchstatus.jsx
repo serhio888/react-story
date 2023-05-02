@@ -33,7 +33,7 @@ const SearchStatus = ({ length }) => {
         </div>
     )
 }
-SearchStatus.prototype = {
+SearchStatus.propTypes = {
     length: PropTypes.string.isRequired
 }
 
