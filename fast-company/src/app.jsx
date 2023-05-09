@@ -41,12 +41,12 @@ const App = () => {
     if (users.length === 0) return <SearchStatus length={users.length} />
     return (
         <div>
-            <div>
+            <div className="mb-2">
                 <SearchStatus length={users.length} />
             </div>
             <div className="d-flex justify-content-start">
                 {professions ? (
-                    <div>
+                    <div className="mx-2">
                         <GroupList professions={professions} />
                     </div>
                 ) : (
@@ -54,7 +54,7 @@ const App = () => {
                         <Loader string={"загружаем профессии"} />
                     </div>
                 )}
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column flex-grow-1 mx-4">
                     <Users
                         bookmarkActive={handleToggleBookmark}
                         deleteUser={handleDelete}
