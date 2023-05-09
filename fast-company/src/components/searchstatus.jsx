@@ -34,7 +34,7 @@ const SearchStatus = ({ length }) => {
     )
 }
 SearchStatus.propTypes = {
-    length: PropTypes.string.isRequired
+    length: PropTypes.number.isRequired
 }
 
 export default SearchStatus
