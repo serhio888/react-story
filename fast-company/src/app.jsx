@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from "react"
 import Users from "./components/users"
-//import SearchStatus from "./components/searchstatus"
 import GroupList from "./components/grouplist"
 import Loader from "./components/loader"
-import { list } from "./api/fake.api/professions.api"
 import "bootstrap/dist/css/bootstrap.css"
 
-import { fetchAll } from "./api/fake.api/user.api"
+import API from "./api/index"
 
 const App = () => {
-    const [users, setUsers] = useState(fetchAll())
+    const [users, setUsers] = useState([])
     const [professions, setProfessions] = useState()
     const [filteredItems, setFilteredItems] = useState()
-
     useEffect(() => {
-        list.then((data) => {
+        API.users.fetchAll().then((data) => {
+            setUsers(data)
+        })
+    }, [])
+    useEffect(() => {
+        API.professions.fetchAll().then((data) => {
             setProfessions(data)
         })
     }, [])
 
     const handleItems = (selected) => {
+        console.log(selected)
         setFilteredItems(selected)
     }
 
@@ -28,7 +31,7 @@ const App = () => {
     }
 
     const handleReset = () => {
-        setUsers(fetchAll())
+        //setUsers(fetchAll())
         setFilteredItems()
     }
 

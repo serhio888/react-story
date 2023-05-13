@@ -34,7 +34,7 @@ const GroupList = ({ items, checkItems, reset, active }) => {
 }
 
 GroupList.propTypes = {
-    items: PropTypes.object.isRequired,
+    items: PropTypes.oneOfType(PropTypes.object, PropTypes.array),
     checkItems: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
     active: PropTypes.object

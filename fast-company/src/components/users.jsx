@@ -11,6 +11,8 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const handlePageChange = (page) => {
         setCurrentPage(page)
     }
+    console.log(users)
+    console.log(filteredItems)
     const filtered = filteredItems
         ? users.filter((user) => user.profession === filteredItems)
         : users
@@ -21,6 +23,7 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
             setCurrentPage(currentPage - 1)
         }
     }, [userCrop])
+
     return (
         <>
             <SearchStatus length={count} />
