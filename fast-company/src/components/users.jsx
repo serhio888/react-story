@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react"
 import Pagination from "./pagination"
 import User from "./user"
+import SearchStatus from "./searchstatus"
 import { paginate } from "../utils/paginate"
 import PropTypes from "prop-types"
 
 const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const [currentPage, setCurrentPage] = useState(1)
-    const count = users.length
-    const pageSize = 4
+    const pageSize = 2
     const handlePageChange = (page) => {
         setCurrentPage(page)
     }
-    const userCrop = paginate(filteredItems, currentPage, pageSize)
+    const filtered = filteredItems
+        ? users.filter((user) => user.profession === filteredItems)
+        : users
+    const userCrop = paginate(filtered, currentPage, pageSize)
+    const count = filtered.length
     useEffect(() => {
         if (userCrop.length === 0 && currentPage !== 1) {
             setCurrentPage(currentPage - 1)
@@ -19,6 +23,7 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     }, [userCrop])
     return (
         <>
+            <SearchStatus length={count} />
             <table className="table">
                 <thead>
                     <tr>
@@ -58,6 +63,6 @@ Users.propTypes = {
     bookmarkActive: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
     users: PropTypes.array.isRequired,
-    filteredItems: PropTypes.array.isRequired
+    filteredItems: PropTypes.object
 }
 export default Users

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Users from "./components/users"
-import SearchStatus from "./components/searchstatus"
+//import SearchStatus from "./components/searchstatus"
 import GroupList from "./components/grouplist"
 import Loader from "./components/loader"
 import { list } from "./api/fake.api/professions.api"
@@ -11,23 +11,25 @@ import { fetchAll } from "./api/fake.api/user.api"
 const App = () => {
     const [users, setUsers] = useState(fetchAll())
     const [professions, setProfessions] = useState()
-    const [filteredItems, setFilteredItems] = useState(fetchAll())
+    const [filteredItems, setFilteredItems] = useState()
 
     useEffect(() => {
-        list.then((object) => {
-            setProfessions(object)
+        list.then((data) => {
+            setProfessions(data)
         })
     }, [])
 
-    const handleProfessions = (profSelected) => {
-        console.log(profSelected)
-        setFilteredItems(
-            users.filter((user) => user.profession === profSelected)
-        )
+    const handleItems = (selected) => {
+        setFilteredItems(selected)
     }
 
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId))
+    }
+
+    const handleReset = () => {
+        setUsers(fetchAll())
+        setFilteredItems()
     }
 
     const handleToggleBookmark = (userId) => {
@@ -46,18 +48,16 @@ const App = () => {
         )
     }
 
-    if (users.length === 0) return <SearchStatus length={users.length} />
     return (
         <div>
-            <div className="mb-2">
-                <SearchStatus length={users.length} />
-            </div>
             <div className="d-flex justify-content-start">
                 {professions ? (
                     <div className="mx-2">
                         <GroupList
                             items={professions}
-                            checkProfessions={handleProfessions}
+                            checkItems={handleItems}
+                            reset={handleReset}
+                            active={filteredItems}
                         />
                     </div>
                 ) : (
