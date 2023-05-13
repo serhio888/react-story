@@ -17,6 +17,6 @@ module.exports = {
     "comma-dangle": ["error", "never"],
     semi: [2, "never"],
     "multiline-ternary": ["error", "never"],
-    "spaced-comment": ["error", "never"],
+    "spaced-comment": ["off", "never"],
   },
 };

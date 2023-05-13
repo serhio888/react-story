@@ -1,17 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const GroupList = ({ professions }) => {
-    const arrayProfessions = Object.values(professions)
+const GroupList = ({ items, checkProfessions }) => {
+    //const arrayProfessions = Object.values(professions)
+    //console.log(arrayProfessions)
+    console.log(Object.keys(items))
     return (
         <ul className="list-group">
-            {arrayProfessions.map((item) => (
+            {Object.keys(items).map((item) => (
                 <li
-                    key={item.id}
+                    key={items[item]._id}
                     className="list-group-item"
                     style={{ textAlign: "center" }}
+                    onClick={() => checkProfessions(items[item])}
+                    role="button"
                 >
-                    {item.name}
+                    {items[item].name}
                 </li>
             ))}
             {
@@ -26,7 +30,8 @@ const GroupList = ({ professions }) => {
 }
 
 GroupList.propTypes = {
-    professions: PropTypes.object.isRequired
+    items: PropTypes.object.isRequired,
+    checkProfessions: PropTypes.func.isRequired
 }
 
 export default GroupList

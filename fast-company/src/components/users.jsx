@@ -4,14 +4,14 @@ import User from "./user"
 import { paginate } from "../utils/paginate"
 import PropTypes from "prop-types"
 
-const Users = ({ bookmarkActive, deleteUser, users }) => {
+const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const [currentPage, setCurrentPage] = useState(1)
     const count = users.length
     const pageSize = 4
     const handlePageChange = (page) => {
         setCurrentPage(page)
     }
-    const userCrop = paginate(users, currentPage, pageSize)
+    const userCrop = paginate(filteredItems, currentPage, pageSize)
     useEffect(() => {
         if (userCrop.length === 0 && currentPage !== 1) {
             setCurrentPage(currentPage - 1)
@@ -57,6 +57,7 @@ const Users = ({ bookmarkActive, deleteUser, users }) => {
 Users.propTypes = {
     bookmarkActive: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
-    users: PropTypes.array.isRequired
+    users: PropTypes.array.isRequired,
+    filteredItems: PropTypes.array.isRequired
 }
 export default Users

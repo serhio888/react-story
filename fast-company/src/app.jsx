@@ -10,13 +10,21 @@ import { fetchAll } from "./api/fake.api/user.api"
 
 const App = () => {
     const [users, setUsers] = useState(fetchAll())
-    const [professions, setProfessions] = useState(null)
+    const [professions, setProfessions] = useState()
+    const [filteredItems, setFilteredItems] = useState(fetchAll())
 
     useEffect(() => {
         list.then((object) => {
             setProfessions(object)
         })
     }, [])
+
+    const handleProfessions = (profSelected) => {
+        console.log(profSelected)
+        setFilteredItems(
+            users.filter((user) => user.profession === profSelected)
+        )
+    }
 
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId))
@@ -47,7 +55,10 @@ const App = () => {
             <div className="d-flex justify-content-start">
                 {professions ? (
                     <div className="mx-2">
-                        <GroupList professions={professions} />
+                        <GroupList
+                            items={professions}
+                            checkProfessions={handleProfessions}
+                        />
                     </div>
                 ) : (
                     <div>
@@ -59,6 +70,7 @@ const App = () => {
                         bookmarkActive={handleToggleBookmark}
                         deleteUser={handleDelete}
                         users={users}
+                        filteredItems={filteredItems}
                     />
                 </div>
             </div>
