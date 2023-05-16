@@ -36,7 +36,7 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
                 bookmarkActive={bookmarkActive}
                 deleteUser={deleteUser}
                 onSort={handleSort}
-                currentSort={order}
+                selectedSort={order}
             />
             <Pagination
                 itemsCount={count}
