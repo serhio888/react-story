@@ -1,33 +1,34 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const TableHeader = ({ colums, onSort, selectedSort }) => {
+const TableHeader = ({ columns, onSort, selectedSort }) => {
+    console.log(Object.keys(columns))
     const handleSort = (item) => {
-        if (selectedSort.iter === item) {
+        if (selectedSort.path === item) {
             onSort({
                 ...selectedSort,
                 order: selectedSort.order === "asc" ? "desc" : "asc"
             })
         } else {
-            onSort({ iter: item, order: "asc" })
+            onSort({ path: item, order: "asc" })
         }
     }
     return (
         <thead>
             <tr>
-                {Object.keys(colums).map((column, index) => {
+                {Object.keys(columns).map((column, index) => {
                     return (
                         <th
-                            key={index}
+                            key={column}
                             onClick={
-                                column.iter
-                                    ? () => handleSort(column.iter)
+                                columns[column].iter
+                                    ? () => handleSort(columns[column].iter)
                                     : null
                             }
                             scope="col"
-                            role={column.iter ? "button" : null}
+                            role={columns[column].iter ? "button" : null}
                         >
-                            {column.name}
+                            {columns[column].name}
                         </th>
                     )
                 })}
@@ -36,7 +37,7 @@ const TableHeader = ({ colums, onSort, selectedSort }) => {
     )
 }
 TableHeader.propTypes = {
-    colums: PropTypes.object.isRequired,
+    columns: PropTypes.object.isRequired,
     selectedSort: PropTypes.object.isRequired,
     onSort: PropTypes.func.isRequired
 }

@@ -1,7 +1,7 @@
 import React from "react"
-import User from "./user"
 import PropTypes from "prop-types"
 import TableHeader from "./tableHeader"
+import TableBody from "./tablebody"
 
 const UsersTables = ({
     users,
@@ -10,27 +10,28 @@ const UsersTables = ({
     onSort,
     selectedSort
 }) => {
-    const colums = {
-        name: { iter: "name", name: "Имя" },
+    const columns = {
+        name: { path: "name", name: "Имя" },
         qualities: { name: "Качества" },
-        profession: { iter: "profession.name", name: "Профессия" },
+        profession: { path: "profession.name", name: "Профессия" },
         completedMeetings: {
-            iter: "completedMeetings",
+            path: "completedMeetings",
             name: "Встретился, раз"
         },
-        rate: { iter: "rate", name: "Оценка" },
-        bookmark: { iter: "bookmark", name: "Избранное" },
+        rate: { path: "rate", name: "Оценка" },
+        bookmark: { path: "bookmark", name: "Избранное" },
         delete: {}
     }
 
     return (
         <table className="table">
             <TableHeader
-                colums={colums}
+                columns={columns}
                 onSort={onSort}
                 selectedSort={selectedSort}
             />
-            <tbody>
+            <TableBody columns={columns} data={users} />
+            {/* <tbody>
                 {users.map((user) => {
                     return (
                         <User
@@ -42,7 +43,7 @@ const UsersTables = ({
                         />
                     )
                 })}
-            </tbody>
+            </tbody> */}
         </table>
     )
 }
