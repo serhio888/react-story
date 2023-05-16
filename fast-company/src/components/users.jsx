@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Pagination from "./pagination"
-import User from "./user"
 import SearchStatus from "./searchstatus"
+import UsersTables from "./usersTable"
 import { paginate } from "../utils/paginate"
 import PropTypes from "prop-types"
 
@@ -11,8 +11,9 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const handlePageChange = (page) => {
         setCurrentPage(page)
     }
-    //console.log(users)
-    //console.log(filteredItems)
+    const handleSort = (param) => {
+        console.log(param)
+    }
     const filtered = filteredItems
         ? users.filter((user) => user.profession.name === filteredItems.name)
         : users
@@ -27,32 +28,12 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     return (
         <>
             <SearchStatus length={count} />
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Качества</th>
-                        <th scope="col">Профессия</th>
-                        <th scope="col">Встретился, раз</th>
-                        <th scope="col">Оценка</th>
-                        <th scope="col">Избранное</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {userCrop.map((user) => {
-                        return (
-                            <User
-                                key={user._id}
-                                bookmarkActive={bookmarkActive}
-                                deleteUser={deleteUser}
-                                user={user}
-                                id={user._id}
-                            />
-                        )
-                    })}
-                </tbody>
-            </table>
+            <UsersTables
+                users={userCrop}
+                bookmarkActive={bookmarkActive}
+                deleteUser={deleteUser}
+                onSort={handleSort}
+            />
             <Pagination
                 itemsCount={count}
                 pageSize={pageSize}

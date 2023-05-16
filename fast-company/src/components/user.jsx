@@ -34,7 +34,7 @@ const User = ({ bookmarkActive, deleteUser, user, id }) => {
 }
 
 User.propTypes = {
-    bookmarkActive: PropTypes.func.isRequired,
+    bookmarkActive: PropTypes.func,
     deleteUser: PropTypes.func.isRequired,
     user: PropTypes.shape({
         name: PropTypes.string.isRequired,
