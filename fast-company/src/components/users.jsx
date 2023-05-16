@@ -11,10 +11,10 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const handlePageChange = (page) => {
         setCurrentPage(page)
     }
-    console.log(users)
-    console.log(filteredItems)
+    //console.log(users)
+    //console.log(filteredItems)
     const filtered = filteredItems
-        ? users.filter((user) => user.profession === filteredItems)
+        ? users.filter((user) => user.profession.name === filteredItems.name)
         : users
     const userCrop = paginate(filtered, currentPage, pageSize)
     const count = filtered.length

@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const GroupList = ({ items, checkItems, reset, active }) => {
+    //console.log("items", Object.keys(items))
     return (
         <ul className="list-group">
             {Object.keys(items).map((item) => (
@@ -34,7 +35,10 @@ const GroupList = ({ items, checkItems, reset, active }) => {
 }
 
 GroupList.propTypes = {
-    items: PropTypes.oneOfType(PropTypes.object, PropTypes.array),
+    items: PropTypes.oneOfType([
+        PropTypes.object.isRequired,
+        PropTypes.array.isRequired
+    ]),
     checkItems: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
     active: PropTypes.object

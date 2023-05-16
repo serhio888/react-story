@@ -17,12 +17,13 @@ const App = () => {
     }, [])
     useEffect(() => {
         API.professions.fetchAll().then((data) => {
+            //console.log(data)
             setProfessions(data)
         })
     }, [])
 
     const handleItems = (selected) => {
-        console.log(selected)
+        //console.log(selected)
         setFilteredItems(selected)
     }
 
@@ -31,7 +32,6 @@ const App = () => {
     }
 
     const handleReset = () => {
-        //setUsers(fetchAll())
         setFilteredItems()
     }
 
