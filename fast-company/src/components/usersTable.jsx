@@ -4,6 +4,7 @@ import TableHeader from "./tableHeader"
 import TableBody from "./tablebody"
 import Bookmark from "./bookmark"
 import Qualities from "./qualities"
+import Table from "./table"
 
 const UsersTables = ({
     users,
@@ -51,14 +52,14 @@ const UsersTables = ({
     }
 
     return (
-        <table className="table">
+        <Table>
             <TableHeader
                 columns={columns}
                 onSort={onSort}
                 selectedSort={selectedSort}
             />
             <TableBody columns={columns} data={users} />
-        </table>
+        </Table>
     )
 }
 
