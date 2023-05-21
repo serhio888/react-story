@@ -13,7 +13,11 @@ const Users = () => {
     const [users, setUsers] = useState([])
     const [professions, setProfessions] = useState()
     const [filteredItems, setFilteredItems] = useState()
-    const [order, setOrder] = useState({ path: "", order: "asc" })
+    const [order, setOrder] = useState({
+        path: "",
+        order: "asc",
+        arrow: ""
+    })
     const pageSize = 6
     const handleItems = (selected) => {
         setFilteredItems(selected)

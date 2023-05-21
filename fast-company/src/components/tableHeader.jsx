@@ -2,14 +2,26 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const TableHeader = ({ columns, onSort, selectedSort }) => {
+    console.log("selected sort", selectedSort)
+
     const handleSort = (item) => {
         if (selectedSort.path === item) {
             onSort({
                 ...selectedSort,
-                order: selectedSort.order === "asc" ? "desc" : "asc"
+                order: selectedSort.order === "asc" ? "desc" : "asc",
+                arrow:
+                    selectedSort.order === "asc" ? (
+                        <i className="bi bi-caret-down-fill"></i>
+                    ) : (
+                        <i className="bi bi-caret-up-fill"></i>
+                    )
             })
         } else {
-            onSort({ path: item, order: "asc" })
+            onSort({
+                path: item,
+                order: "asc",
+                arrow: <i className="bi bi-caret-up-fill"></i>
+            })
         }
     }
     return (
@@ -27,7 +39,14 @@ const TableHeader = ({ columns, onSort, selectedSort }) => {
                             scope="col"
                             role={columns[column].path ? "button" : null}
                         >
-                            {columns[column].name}
+                            {
+                                <>
+                                    {columns[column].name}
+                                    {columns[column].path === selectedSort.path
+                                        ? selectedSort.arrow
+                                        : null}
+                                </>
+                            }
                         </th>
                     )
                 })}
