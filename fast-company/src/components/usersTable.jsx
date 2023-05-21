@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import TableHeader from "./tableHeader"
 import TableBody from "./tablebody"
+import Bookmark from "./bookmark"
 
 const UsersTables = ({
     users,
@@ -19,8 +20,30 @@ const UsersTables = ({
             name: "Встретился, раз"
         },
         rate: { path: "rate", name: "Оценка" },
-        bookmark: { path: "bookmark", name: "Избранное" },
-        delete: {}
+        bookmark: {
+            path: "bookmark",
+            name: "Избранное",
+            component: (user) => {
+                return (
+                    <Bookmark
+                        bookmarkActive={bookmarkActive}
+                        id={user._id}
+                        active={user.bookmark}
+                    />
+                )
+            }
+        },
+        delete: {
+            component: (user) => (
+                <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deleteUser(user._id)}
+                >
+                    delete
+                </button>
+            )
+        }
     }
 
     return (
@@ -31,19 +54,6 @@ const UsersTables = ({
                 selectedSort={selectedSort}
             />
             <TableBody columns={columns} data={users} />
-            {/* <tbody>
-                {users.map((user) => {
-                    return (
-                        <User
-                            key={user._id}
-                            user={user}
-                            bookmarkActive={bookmarkActive}
-                            deleteUser={deleteUser}
-                            id={user._id}
-                        />
-                    )
-                })}
-            </tbody> */}
         </table>
     )
 }

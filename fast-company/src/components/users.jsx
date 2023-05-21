@@ -8,7 +8,7 @@ import _ from "lodash"
 
 const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const [currentPage, setCurrentPage] = useState(1)
-    const [order, setOrder] = useState({ iter: "", order: "asc" })
+    const [order, setOrder] = useState({ path: "", order: "asc" })
     const pageSize = 6
     const handlePageChange = (page) => {
         setCurrentPage(page)
@@ -19,7 +19,7 @@ const Users = ({ bookmarkActive, deleteUser, users, filteredItems }) => {
     const filtered = filteredItems
         ? users.filter((user) => user.profession.name === filteredItems.name)
         : users
-    const sorteredUsers = _.orderBy(filtered, order.iter, order.order)
+    const sorteredUsers = _.orderBy(filtered, order.path, order.order)
     const userCrop = paginate(sorteredUsers, currentPage, pageSize)
     const count = filtered.length
     useEffect(() => {

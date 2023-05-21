@@ -39,7 +39,6 @@ const App = () => {
         setUsers((prevState) =>
             prevState.map((user) => {
                 if (user._id === userId) {
-                    console.log(user)
                     return {
                         ...user,
                         bookmark: !user.bookmark

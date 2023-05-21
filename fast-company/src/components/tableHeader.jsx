@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const TableHeader = ({ columns, onSort, selectedSort }) => {
-    console.log(Object.keys(columns))
     const handleSort = (item) => {
         if (selectedSort.path === item) {
             onSort({
@@ -16,17 +15,17 @@ const TableHeader = ({ columns, onSort, selectedSort }) => {
     return (
         <thead>
             <tr>
-                {Object.keys(columns).map((column, index) => {
+                {Object.keys(columns).map((column) => {
                     return (
                         <th
                             key={column}
                             onClick={
-                                columns[column].iter
-                                    ? () => handleSort(columns[column].iter)
+                                columns[column].path
+                                    ? () => handleSort(columns[column].path)
                                     : null
                             }
                             scope="col"
-                            role={columns[column].iter ? "button" : null}
+                            role={columns[column].path ? "button" : null}
                         >
                             {columns[column].name}
                         </th>
