@@ -33,8 +33,8 @@ const SearchStatus = ({ length }) => {
         </div>
     )
 }
-SearchStatus.prototype = {
-    length: PropTypes.string.isRequired
+SearchStatus.propTypes = {
+    length: PropTypes.number.isRequired
 }
 
 export default SearchStatus
