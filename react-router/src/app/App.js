@@ -13,7 +13,10 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/login" component={Login} />
+        <Route
+          path="/login"
+          render={(props) => <Login {...props} isAdmin={false} />}
+        />
         <Route path="/posts" component={Posts} />
       </Switch>
     </div>
