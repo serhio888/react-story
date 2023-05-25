@@ -1,11 +1,10 @@
 import React from "react";
 
-const Post = ({ match, posts }) => {
-  const postId = match.params.postId;
+const Post = ({ posts, id }) => {
   return (
     <>
-      {posts.find((post) => post.id.toString() === postId) ? (
-        <h3>{`Пост номер ${postId}`}</h3>
+      {posts.find((post) => post.id.toString() === id) ? (
+        <h3>{`Пост номер ${id}`}</h3>
       ) : (
         `нет такого поста`
       )}
