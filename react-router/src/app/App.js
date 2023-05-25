@@ -4,6 +4,14 @@ import Home from "./../components/home";
 import Login from "./../components/login";
 import Posts from "./../components/posts";
 import Dashboard from "./../components/dashboard";
+import Post from "../components/post";
+import PostsList from "./../components/postsList";
+
+const posts = [
+  { id: 1, label: "post 1" },
+  { id: 2, label: "post 2" },
+  { id: 3, label: "post 3" },
+];
 
 function App() {
   return (
@@ -13,11 +21,15 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/login" component={Login} />
         <Route
-          path="/login"
-          render={(props) => <Login {...props} isAdmin={false} />}
+          path="/posts/:postId"
+          render={(props) => <Post {...props} posts={posts} />}
         />
-        <Route path="/posts" component={Posts} />
+        <Route
+          path="/posts"
+          render={(props) => <PostsList {...props} posts={posts} />}
+        />
       </Switch>
     </div>
   );
