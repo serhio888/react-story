@@ -1,6 +1,15 @@
 import React from "react";
 
-const Post = ({ posts, id }) => {
+const Post = ({ posts, id, history }) => {
+  const necessaryPost = posts.find((post) => post.id.toString() === id);
+  const handleRedirect = () => {
+    if (necessaryPost) {
+      history.push("/posts");
+    } else {
+      history.replace("/posts");
+    }
+  };
+
   return (
     <>
       {posts.find((post) => post.id.toString() === id) ? (
@@ -8,6 +17,7 @@ const Post = ({ posts, id }) => {
       ) : (
         `нет такого поста`
       )}
+      <button onClick={() => handleRedirect()}>to posts</button>
     </>
   );
 };

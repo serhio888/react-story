@@ -3,7 +3,7 @@ import PostsList from "./postsList";
 import qs from "query-string";
 import _ from "lodash";
 
-const Posts = ({ match, location }) => {
+const Posts = ({ match, location, history }) => {
   const posts = [
     { id: 1, label: "post 1" },
     { id: 2, label: "post 2" },
@@ -18,7 +18,7 @@ const Posts = ({ match, location }) => {
   return (
     <>
       {postId ? (
-        <Post id={postId} posts={posts} />
+        <Post id={postId} posts={posts} history={history} />
       ) : (
         <PostsList posts={cropPosts} />
       )}
