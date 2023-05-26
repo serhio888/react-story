@@ -1,7 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
-const Post = ({ posts, id, history }) => {
+const Post = ({ posts, id }) => {
   const necessaryPost = posts.find((post) => post.id.toString() === id);
+  const history = useHistory();
   const handleRedirect = () => {
     if (necessaryPost) {
       history.push("/posts");
