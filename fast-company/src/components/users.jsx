@@ -76,7 +76,9 @@ const Users = () => {
 
     return (
         <>
-            <SearchStatus length={count} />
+            <div className="ms-2">
+                <SearchStatus length={count} />
+            </div>
             <div className="d-flex mt-2">
                 {professions ? (
                     <div className="mx-2">
