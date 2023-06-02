@@ -4,8 +4,13 @@ import App from "./app"
 import "./index.css"
 
 import reportWebVitals from "./reportWebVitals"
+import { BrowserRouter } from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<App />) //убрал React.StrictMode для того, что бы лишни консоль лог не отображался, потом поставлю обратно
+root.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+) //убрал React.StrictMode для того, что бы лишни консоль лог не отображался, потом поставлю обратно
 
 reportWebVitals()

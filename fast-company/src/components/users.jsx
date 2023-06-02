@@ -7,6 +7,8 @@ import Loader from "./loader"
 import { paginate } from "../utils/paginate"
 import API from "../api"
 import _ from "lodash"
+import { useParams } from "react-router-dom"
+import UserPage from "./userpage"
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -18,6 +20,7 @@ const Users = () => {
         order: "asc",
         arrow: ""
     })
+    const { userId } = useParams()
     const pageSize = 6
     const handleItems = (selected) => {
         setFilteredItems(selected)
@@ -74,43 +77,49 @@ const Users = () => {
         }
     }, [userCrop])
 
-    return (
-        <>
-            <SearchStatus length={count} />
-            <div className="d-flex mt-2">
-                {professions ? (
-                    <div className="mx-2">
-                        <GroupList
-                            items={professions}
-                            checkItems={handleItems}
-                            reset={handleReset}
-                            active={filteredItems}
+    if (userId) {
+        return <UserPage userId={userId} />
+    } else {
+        return (
+            <>
+                <div className="ms-2">
+                    <SearchStatus length={count} />
+                </div>
+                <div className="d-flex mt-2">
+                    {professions ? (
+                        <div className="mx-2">
+                            <GroupList
+                                items={professions}
+                                checkItems={handleItems}
+                                reset={handleReset}
+                                active={filteredItems}
+                            />
+                        </div>
+                    ) : (
+                        <div>
+                            <Loader string={"загружаем профессии"} />
+                        </div>
+                    )}
+
+                    <div className="d-flex flex-column flex-grow-1 m-2">
+                        <UsersTables
+                            users={userCrop}
+                            bookmarkActive={handleToggleBookmark}
+                            deleteUser={handleDelete}
+                            onSort={handleSort}
+                            selectedSort={order}
+                        />
+                        <Pagination
+                            itemsCount={count}
+                            pageSize={pageSize}
+                            onPageChange={handlePageChange}
+                            active={currentPage}
                         />
                     </div>
-                ) : (
-                    <div>
-                        <Loader string={"загружаем профессии"} />
-                    </div>
-                )}
-
-                <div className="d-flex flex-column flex-grow-1 m-2">
-                    <UsersTables
-                        users={userCrop}
-                        bookmarkActive={handleToggleBookmark}
-                        deleteUser={handleDelete}
-                        onSort={handleSort}
-                        selectedSort={order}
-                    />
-                    <Pagination
-                        itemsCount={count}
-                        pageSize={pageSize}
-                        onPageChange={handlePageChange}
-                        active={currentPage}
-                    />
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 
 export default Users
