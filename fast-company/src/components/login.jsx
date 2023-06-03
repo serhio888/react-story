@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 
 const Login = () => {
-    const [email, setEmail] = useState("")
-    const handlerChange = (e) => {
-        setEmail(e.target.value)
+    const [data, setData] = useState({ email: "", password: "" })
+    const handlerChange = ({ target }) => {
+        setData((pS) => ({ ...pS, [target.name]: target.value }))
     }
 
     return (
@@ -13,13 +13,20 @@ const Login = () => {
                 <input
                     type="text"
                     id="email"
-                    value={email}
+                    value={data.email}
+                    name="email"
                     onChange={handlerChange}
                 />
             </div>
             <div>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" />
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={data.password}
+                    onChange={handlerChange}
+                />
             </div>
         </form>
     )
