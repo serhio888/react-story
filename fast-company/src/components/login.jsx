@@ -40,6 +40,7 @@ const Login = () => {
                 name={"email"}
                 onChange={handlerChange}
                 label="EMAIL"
+                error={errors.email}
             />
             <TextField
                 value={data.password}
@@ -47,6 +48,7 @@ const Login = () => {
                 onChange={handlerChange}
                 label="password"
                 type="password"
+                error={errors.password}
             />
             <button>Submit</button>
         </form>
