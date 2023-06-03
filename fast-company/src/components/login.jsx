@@ -7,8 +7,13 @@ const Login = () => {
         setData((pS) => ({ ...pS, [target.name]: target.value }))
     }
 
+    const handlerSubmit = (e) => {
+        e.preventDefault()
+        console.log(data)
+    }
+
     return (
-        <form action="">
+        <form onSubmit={handlerSubmit}>
             <TextField
                 value={data.email}
                 name={"email"}
@@ -22,6 +27,7 @@ const Login = () => {
                 label="password"
                 type="password"
             />
+            <button>Submit</button>
         </form>
     )
 }
