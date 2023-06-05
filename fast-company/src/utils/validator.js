@@ -1,5 +1,4 @@
 export function validator(data, config) {
-    console.log("")
     const errors = {}
     function validate(validateMethod, data, config) {
         switch (validateMethod) {
