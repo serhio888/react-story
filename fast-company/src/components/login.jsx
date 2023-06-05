@@ -25,6 +25,15 @@ const Login = () => {
         password: {
             isRequired: {
                 message: "Password обязателен для заполнения"
+            },
+            isCapitalSymbol: {
+                message: "Нужен заглавный символ"
+            },
+            isDigit: {
+                message: "Нужна цифра"
+            },
+            isCount: {
+                message: "Пароль нужен восьми символьный"
             }
         }
     }
