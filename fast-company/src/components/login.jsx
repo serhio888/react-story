@@ -53,6 +53,8 @@ const Login = () => {
         return Object.keys(errors).length === 0
     }
 
+    const isValid = Object.keys(errors).length === 0
+
     return (
         <form onSubmit={handlerSubmit}>
             <TextField
@@ -70,7 +72,7 @@ const Login = () => {
                 type="password"
                 error={errors.password}
             />
-            <button>Submit</button>
+            <button disabled={!isValid}>Submit</button>
         </form>
     )
 }
