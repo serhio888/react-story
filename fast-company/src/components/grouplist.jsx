@@ -10,7 +10,9 @@ const GroupList = ({ items, checkItems, reset, active }) => {
                     key={items[item]._id}
                     className={
                         "list-group-item" +
-                        (items[item] === active ? " list-group-item-info" : "")
+                        (items[item].name === active.name
+                            ? " list-group-item-info"
+                            : "")
                     }
                     style={{ textAlign: "center" }}
                     onClick={() => checkItems(items[item])}
