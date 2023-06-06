@@ -9,12 +9,16 @@ import API from "../api"
 import _ from "lodash"
 import { useParams } from "react-router-dom"
 import UserPage from "./userpage"
+import SearchPanel from "./searchPanel"
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [users, setUsers] = useState([])
     const [professions, setProfessions] = useState()
-    const [filteredItems, setFilteredItems] = useState()
+    const [filteredItems, setFilteredItems] = useState({
+        _id: "",
+        regExp: ""
+    })
     const [order, setOrder] = useState({
         path: "",
         order: "asc",
@@ -22,8 +26,24 @@ const Users = () => {
     })
     const { userId } = useParams()
     const pageSize = 6
+    const handleSearch = (str) => {
+        if (str === "") {
+            setFilteredItems({
+                _id: "",
+                regExp: ""
+            })
+        }
+        const regExp = new RegExp(str, "gi")
+        setFilteredItems((prevState) => {
+            return {
+                ...prevState,
+                _id: "",
+                regExp
+            }
+        })
+    }
     const handleItems = (selected) => {
-        setFilteredItems(selected)
+        setFilteredItems({ ...selected, regExp: "" })
     }
 
     const handleDelete = (userId) => {
@@ -31,7 +51,10 @@ const Users = () => {
     }
 
     const handleReset = () => {
-        setFilteredItems()
+        setFilteredItems({
+            _id: "",
+            regExp: ""
+        })
     }
 
     const handleToggleBookmark = (userId) => {
@@ -54,8 +77,10 @@ const Users = () => {
     const handleSort = (item) => {
         setOrder(item)
     }
-    const filtered = filteredItems
-        ? users.filter((user) => user.profession.name === filteredItems.name)
+    const filtered = filteredItems._id
+        ? users.filter((user) => user.profession._id === filteredItems._id)
+        : filteredItems.regExp
+        ? users.filter((user) => filteredItems.regExp.test(user.name))
         : users
     const sorteredUsers = _.orderBy(filtered, order.path, order.order)
     const userCrop = paginate(sorteredUsers, currentPage, pageSize)
@@ -102,6 +127,7 @@ const Users = () => {
                     )}
 
                     <div className="d-flex flex-column flex-grow-1 m-2">
+                        <SearchPanel search={handleSearch} />
                         <UsersTables
                             users={userCrop}
                             bookmarkActive={handleToggleBookmark}
