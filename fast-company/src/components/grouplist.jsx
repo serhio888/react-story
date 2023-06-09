@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const GroupList = ({ items, checkItems, reset, active }) => {
-    //console.log("items", Object.keys(items))
     return (
         <ul className="list-group">
             {Object.keys(items).map((item) => (

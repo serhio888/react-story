@@ -9,12 +9,14 @@ import API from "../api"
 import _ from "lodash"
 import { useParams } from "react-router-dom"
 import UserPage from "./userpage"
+import SearchPanel from "./searchPanel"
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [users, setUsers] = useState([])
     const [professions, setProfessions] = useState()
     const [filteredItems, setFilteredItems] = useState()
+    const [filteredItemsSearch, setFilteredItemsSearch] = useState()
     const [order, setOrder] = useState({
         path: "",
         order: "asc",
@@ -22,6 +24,11 @@ const Users = () => {
     })
     const { userId } = useParams()
     const pageSize = 6
+    const handleSearch = (str) => {
+        setFilteredItems()
+        const regExp = new RegExp(str, "gi")
+        setFilteredItemsSearch({ regExp })
+    }
     const handleItems = (selected) => {
         setFilteredItems(selected)
     }
@@ -55,7 +62,9 @@ const Users = () => {
         setOrder(item)
     }
     const filtered = filteredItems
-        ? users.filter((user) => user.profession.name === filteredItems.name)
+        ? users.filter((user) => user.profession._id === filteredItems._id)
+        : filteredItemsSearch
+        ? users.filter((user) => filteredItemsSearch.regExp.test(user.name))
         : users
     const sorteredUsers = _.orderBy(filtered, order.path, order.order)
     const userCrop = paginate(sorteredUsers, currentPage, pageSize)
@@ -102,6 +111,7 @@ const Users = () => {
                     )}
 
                     <div className="d-flex flex-column flex-grow-1 m-2">
+                        <SearchPanel search={handleSearch} />
                         <UsersTables
                             users={userCrop}
                             bookmarkActive={handleToggleBookmark}
