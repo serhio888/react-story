@@ -11,9 +11,13 @@ const SelectField = ({
     const getInputClasses = () => {
         return "form-select" + (error ? " is-invalid" : "")
     }
+
+    const handleChange = ({ target }) => {
+        onChange({ name: [target.name], value: target.value })
+    }
     const optionsArray =
         !Array.isArray(options) && typeof options === "object"
-            ? Object.key(options).map((profession) => ({
+            ? Object.keys(options).map((profession) => ({
                   name: options[profession].name,
                   value: options[profession]._id
               }))
@@ -24,7 +28,7 @@ const SelectField = ({
             <select
                 className={getInputClasses()}
                 value={value}
-                onChange={onChange}
+                onChange={handleChange}
                 name="profession"
             >
                 <option disabled value="">

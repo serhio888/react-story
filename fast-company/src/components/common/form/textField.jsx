@@ -10,7 +10,9 @@ const TextField = ({ type, value, name, onChange, label, error }) => {
     const lookPassword = () => {
         setShowPassword((prevState) => !prevState)
     }
-
+    const handleChange = ({ target }) => {
+        onChange({ name: [target.name], value: target.value })
+    }
     return (
         <div className="mb-4">
             <label htmlFor={name}>{label}</label>
@@ -19,7 +21,7 @@ const TextField = ({ type, value, name, onChange, label, error }) => {
                     type={showPassword ? "text" : type}
                     value={value}
                     name={name}
-                    onChange={onChange}
+                    onChange={handleChange}
                     id={name}
                     className={getInputClasses()}
                 />
