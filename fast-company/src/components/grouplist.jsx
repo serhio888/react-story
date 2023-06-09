@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const GroupList = ({ items, checkItems, reset, active }) => {
-    //console.log("items", Object.keys(items))
     return (
         <ul className="list-group">
             {Object.keys(items).map((item) => (
@@ -10,9 +9,7 @@ const GroupList = ({ items, checkItems, reset, active }) => {
                     key={items[item]._id}
                     className={
                         "list-group-item" +
-                        (items[item].name === active.name
-                            ? " list-group-item-info"
-                            : "")
+                        (items[item] === active ? " list-group-item-info" : "")
                     }
                     style={{ textAlign: "center" }}
                     onClick={() => checkItems(items[item])}
