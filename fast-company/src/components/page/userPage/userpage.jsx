@@ -13,7 +13,6 @@ const UserPage = ({ userId }) => {
     }
     useEffect(() => {
         API.users.getById(userId).then((data) => {
-            console.log(data)
             setUserInfo(data)
         })
     }, [])
