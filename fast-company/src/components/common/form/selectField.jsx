@@ -16,6 +16,8 @@ const SelectField = ({
     const handleChange = ({ target }) => {
         onChange({ name: [target.name], value: target.value })
     }
+
+    const valueItem = typeof value === "object" ? value.name : value
     const optionsArray =
         !Array.isArray(options) && typeof options === "object"
             ? Object.keys(options).map((profession) => ({
@@ -30,7 +32,7 @@ const SelectField = ({
             </label>
             <select
                 className={getInputClasses()}
-                value={value}
+                value={valueItem}
                 onChange={handleChange}
                 name={name}
                 id={name}
@@ -51,12 +53,11 @@ const SelectField = ({
 }
 SelectField.propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     name: PropTypes.string,
     label: PropTypes.string,
     defaultOption: PropTypes.string,
     error: PropTypes.string,
-    name: PropTypes.string,
     options: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 }
 export default SelectField

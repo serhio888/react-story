@@ -8,8 +8,8 @@ const UserPage = ({ userId }) => {
     const [userInfo, setUserInfo] = useState()
     const history = useHistory()
 
-    const backToUsers = () => {
-        history.push("/users")
+    const changeUser = () => {
+        history.push(`/users/${userId}/edit`)
     }
     useEffect(() => {
         API.users.getById(userId).then((data) => {
@@ -28,9 +28,9 @@ const UserPage = ({ userId }) => {
                 <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => backToUsers()}
+                    onClick={() => changeUser()}
                 >
-                    Вернуться к юзерам
+                    Изменить юзера
                 </button>
             </div>
         )

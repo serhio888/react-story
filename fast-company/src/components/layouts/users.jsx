@@ -10,6 +10,7 @@ import _ from "lodash"
 import { useParams } from "react-router-dom"
 import UserPage from "../page/userPage/userpage"
 import SearchPanel from "../common/table/searchPanel"
+import UserChangeForm from "../ui/userChangeForm"
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -22,7 +23,7 @@ const Users = () => {
         order: "asc",
         arrow: ""
     })
-    const { userId } = useParams()
+    const { userId, edit } = useParams()
     const pageSize = 6
     const handleSearch = (str) => {
         setFilteredItems()
@@ -86,6 +87,9 @@ const Users = () => {
         }
     }, [userCrop])
 
+    if (edit === "edit") {
+        return <UserChangeForm userId={userId} />
+    }
     if (userId) {
         return <UserPage userId={userId} />
     } else {
