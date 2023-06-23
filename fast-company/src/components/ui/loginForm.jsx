@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react"
-import TextField from "./textField"
-import { validator } from "./../utils/validator"
+import TextField from "../common/form/textField"
+import { validator } from "../../utils/validator"
+import CheckBoxField from "../common/form/checkboxField"
 
-const Login = () => {
-    const [data, setData] = useState({ email: "", password: "" })
+const LoginForm = () => {
+    const [data, setData] = useState({ email: "", password: "", onStay: false })
     const [errors, setErrors] = useState({})
 
     useEffect(() => {
         validate()
     }, [data])
-    const handlerChange = ({ target }) => {
+    const handleChange = (target) => {
+        console.log("target", target)
         setData((pS) => ({ ...pS, [target.name]: target.value }))
     }
 
@@ -56,37 +58,37 @@ const Login = () => {
     const isValid = Object.keys(errors).length === 0
 
     return (
-        <div className="container mt-4">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 shadow p-4">
-                    <h3 className="mb-4">Login</h3>
-                    <form onSubmit={handlerSubmit}>
-                        <TextField
-                            value={data.email}
-                            name={"email"}
-                            onChange={handlerChange}
-                            label="email"
-                            error={errors.email}
-                        />
-                        <TextField
-                            value={data.password}
-                            name={"password"}
-                            onChange={handlerChange}
-                            label="password"
-                            type="password"
-                            error={errors.password}
-                        />
-                        <button
-                            className="btn btn-primary w-100 mx-auto"
-                            disabled={!isValid}
-                        >
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <form onSubmit={handlerSubmit}>
+            <TextField
+                value={data.email}
+                name={"email"}
+                onChange={handleChange}
+                label="email"
+                error={errors.email}
+            />
+            <TextField
+                value={data.password}
+                name={"password"}
+                onChange={handleChange}
+                label="password"
+                type="password"
+                error={errors.password}
+            />
+            <CheckBoxField
+                name={"onStay"}
+                value={data.onStay}
+                onChange={handleChange}
+            >
+                Оставаться в системе
+            </CheckBoxField>
+            <button
+                className="btn btn-primary w-100 mx-auto"
+                disabled={!isValid}
+            >
+                Submit
+            </button>
+        </form>
     )
 }
 
-export default Login
+export default LoginForm

@@ -1,9 +1,9 @@
 import React from "react"
-import Users from "./components/users"
+import Users from "./components/layouts/users"
 import "bootstrap/dist/css/bootstrap.css"
 import { Route, Switch, Link } from "react-router-dom"
-import Main from "./components/main"
-import Login from "./components/login"
+import Main from "./components/layouts/main"
+import Login from "./components/layouts/login"
 
 const App = () => {
     return (
@@ -27,8 +27,8 @@ const App = () => {
             </ul>
             <Switch>
                 <Route exact path="/" component={Main} />
-                <Route path="/login" component={Login} />
-                <Route path="/users/:userId?" component={Users} />
+                <Route path="/login/:type?" component={Login} />
+                <Route path="/users/:userId?/:edit?" component={Users} />
             </Switch>
         </>
     )

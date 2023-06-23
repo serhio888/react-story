@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react"
-import Pagination from "./pagination"
-import SearchStatus from "./searchstatus"
-import UsersTables from "./usersTable"
-import GroupList from "./grouplist"
-import Loader from "./loader"
-import { paginate } from "../utils/paginate"
-import API from "../api"
+import Pagination from "./../common/pagination"
+import SearchStatus from "../ui/searchstatus"
+import UsersTables from "../common/table/usersTable"
+import GroupList from "./../common/grouplist"
+import Loader from "../ui/loader"
+import { paginate } from "../../utils/paginate"
+import API from "../../api"
 import _ from "lodash"
 import { useParams } from "react-router-dom"
-import UserPage from "./userpage"
-import SearchPanel from "./searchPanel"
+import UserPage from "../page/userPage/userpage"
+import SearchPanel from "../common/table/searchPanel"
+import UserChangeForm from "../ui/userChangeForm"
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -22,7 +23,7 @@ const Users = () => {
         order: "asc",
         arrow: ""
     })
-    const { userId } = useParams()
+    const { userId, edit } = useParams()
     const pageSize = 6
     const handleSearch = (str) => {
         setFilteredItems()
@@ -86,6 +87,9 @@ const Users = () => {
         }
     }, [userCrop])
 
+    if (edit === "edit") {
+        return <UserChangeForm userId={userId} />
+    }
     if (userId) {
         return <UserPage userId={userId} />
     } else {

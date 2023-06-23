@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useHistory } from "react-router-dom"
-import API from "../api"
-import Qualities from "./qualities"
+import API from "../../../api"
+import Qualities from "./../../ui/qualities/qualities"
 
 const UserPage = ({ userId }) => {
     const [userInfo, setUserInfo] = useState()
     const history = useHistory()
 
-    const backToUsers = () => {
-        history.push("/users")
+    const changeUser = () => {
+        history.push(`/users/${userId}/edit`)
     }
     useEffect(() => {
         API.users.getById(userId).then((data) => {
-            console.log(data)
             setUserInfo(data)
         })
     }, [])
@@ -29,9 +28,9 @@ const UserPage = ({ userId }) => {
                 <button
                     type="button"
                     className="btn btn-light"
-                    onClick={() => backToUsers()}
+                    onClick={() => changeUser()}
                 >
-                    Вернуться к юзерам
+                    Изменить юзера
                 </button>
             </div>
         )

@@ -2,8 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import TableHeader from "./tableHeader"
 import TableBody from "./tablebody"
-import Bookmark from "./bookmark"
-import Qualities from "./qualities"
+import Bookmark from "../bookmark"
+import Qualities from "../../ui/qualities/qualities"
 import Table from "./table"
 
 const UsersTables = ({
